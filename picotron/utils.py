@@ -11,14 +11,16 @@ import picotron.process_group_manager as pgm
 import torch, torch.distributed as dist
 
 def print(*args, is_print_rank=True, **kwargs):
-    """ solves multi-process interleaved print problem """
-    if not is_print_rank: return
-    with open(__file__, "r") as fh:
-        fcntl.flock(fh, fcntl.LOCK_EX)
-        try:
-            builtins.print(*args, **kwargs)
-        finally:
-            fcntl.flock(fh, fcntl.LOCK_UN)
+    # TODO: This is still buggy in my case
+    # """ solves multi-process interleaved print problem """
+    # if not is_print_rank: return
+    # with open(__file__, "r") as fh:
+    #     fcntl.flock(fh, fcntl.LOCK_EX)
+    #     try:
+    #         builtins.print(*args, **kwargs)
+    #     finally:
+    #         fcntl.flock(fh, fcntl.LOCK_UN)
+    return builtins.print(*args, **kwargs)
 
 def set_all_seed(seed):
     for module in [random, np.random]: module.seed(seed)
