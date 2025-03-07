@@ -5,6 +5,5 @@ triton==3.2.0
 numpy==2.2.3
 datasets==3.3.2
 transformers==4.49.0
-flash-attn==2.7.4.post1
 wandb
 huggingface_hub[hf_transfer]
